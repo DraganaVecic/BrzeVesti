@@ -5,7 +5,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import helper.Helper;
 
 
 
@@ -16,6 +18,10 @@ public class Main {
         
         System.setProperty("webdriver.chrome.driver", "resources/chromedriver");
         WebDriver driver = new ChromeDriver();
+        WebDriverWait wait = new WebDriverWait(driver, 5);
+        
+        driver.manage().window().fullscreen();
+        
         driver.get("http://bvtest.school.cubes.rs/login");
         
         WebElement emailField = driver.findElement(By.name("email"));
@@ -41,6 +47,17 @@ public class Main {
         
         System.out.println(driver.getTitle());
         
+        WebElement addCategoryButton = wait.until(ExpectedConditions.elementToBeClickable(By.className("pull-right")));
+        addCategoryButton.click();
+        
+        WebElement categoryTitleField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("title")));
+        categoryTitleField.sendKeys(Helper.getRandomText());
+        
+        WebElement saveCategoryButton = wait.until(ExpectedConditions.elementToBeClickable(By.id("save-category-button")));
+        saveCategoryButton.click();
+                
+                
+                
         WebElement regionsLink = driver.findElement(By.linkText("Regions"));
         regionsLink.click();
         
@@ -60,15 +77,16 @@ public class Main {
         //signaturesLink click
         //console ->title
         
-        WebElement authenticationLinks = driver.findElement(By.className("dropdown-toggle"));
-        authenticationLinks.click();
+       // WebElement authenticationLinks = driver.findElement(By.className("dropdown-toggle"));
+      //  authenticationLinks.click();
         
         
-        WebElement logoutLink = driver.findElement(By.linkText("Logout"));
-        logoutLink.click();
+       // WebElement logoutLink = driver.findElement(By.linkText("Logout"));
+      //  logoutLink.click();
         
-        System.out.println(driver.getTitle());
+       // System.out.println(driver.getTitle());
         
+      //  driver.quit();
         
     }
     
